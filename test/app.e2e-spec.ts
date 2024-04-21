@@ -29,36 +29,52 @@ describe('AppController (e2e)', () => {
     await app.init();
   });
 
-  it('/schools (POST)', () => {
+  it('/schools (POST)', async () => {
     const createSchoolDto: CreateSchoolDto = {
       region: 'region',
       name: 'name',
     };
 
-    return request(app.getHttpServer())
+    const res = await request(app.getHttpServer())
       .post('/schools')
       .set('Authorization', `Bearer ${adminToken}`)
       .send(createSchoolDto)
       .expect(201);
+
+    expect(res.body).toMatchObject(createSchoolDto);
   });
 
-  it('/news (POST)', () => {
+  it('/news (POST)', async () => {
     const createNewsDto: CreateNewsDto = {
       school: 1,
       content: 'content',
     };
 
-    return request(app.getHttpServer())
+    const res = await request(app.getHttpServer())
       .post('/news')
       .set('Authorization', `Bearer ${adminToken}`)
       .send(createNewsDto)
       .expect(201);
+
+    expect(res.body).toMatchObject(createNewsDto);
   });
 
-  it('/news (DELETE)', () => {
-    return request(app.getHttpServer())
+  it('/news (PATCH)', async () => {
+    const res = await request(app.getHttpServer())
+      .patch('/news/1')
+      .set('Authorization', `Bearer ${adminToken}`)
+      .send({ content: 'new content' })
+      .expect(200);
+
+    expect(res.body).toMatchObject({ content: 'new content' });
+  });
+
+  it('/news (DELETE)', async () => {
+    const res = await request(app.getHttpServer())
       .delete('/news/1')
       .set('Authorization', `Bearer ${adminToken}`)
       .expect(200);
+
+    expect(res.body).toMatchObject({ deleted: true });
   });
 });

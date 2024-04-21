@@ -16,8 +16,8 @@ export class NewsService {
     return await this.newsRepository.save(createNewsDto);
   }
 
-  update(id: number, updateNewsDto: UpdateNewsDto) {
-    return `This action updates a #${id} news`;
+  async update(id: number, updateNewsDto: UpdateNewsDto) {
+    return await this.newsRepository.save({ id, ...updateNewsDto });
   }
 
   async remove(id: number) {
