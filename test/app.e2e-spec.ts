@@ -54,4 +54,11 @@ describe('AppController (e2e)', () => {
       .send(createNewsDto)
       .expect(201);
   });
+
+  it('/news (DELETE)', () => {
+    return request(app.getHttpServer())
+      .delete('/news/1')
+      .set('Authorization', `Bearer ${adminToken}`)
+      .expect(200);
+  });
 });

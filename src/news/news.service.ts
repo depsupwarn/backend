@@ -20,7 +20,7 @@ export class NewsService {
     return `This action updates a #${id} news`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} news`;
+  async remove(id: number) {
+    return await this.newsRepository.save({ id, deleted: true });
   }
 }
