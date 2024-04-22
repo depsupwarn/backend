@@ -12,9 +12,11 @@ import { Role } from '../src/roles/role.enum';
 describe('AppController (e2e)', () => {
   let app: INestApplication;
   let adminToken;
+  let userToken;
 
   beforeAll(async () => {
     adminToken = new JwtService().sign({ roles: [Role.Admin] }, { secret: jwtConstants.secret });
+    userToken = new JwtService().sign({ id: 1, roles: [Role.User] }, { secret: jwtConstants.secret });
 
     if (fs.existsSync('./test.db')) {
       fs.unlinkSync("./test.db");
@@ -76,5 +78,14 @@ describe('AppController (e2e)', () => {
       .expect(200);
 
     expect(res.body).toMatchObject({ deleted: true });
+  });
+
+  it('/student/subscribe (POST)', async () => {
+    const res = await request(app.getHttpServer())
+      .post('/student/subscribe?school=1')
+      .set('Authorization', `Bearer ${userToken}`)
+      .expect(201);
+
+    expect(res.body).toMatchObject({ school: 1, user: 1 });
   });
 });
