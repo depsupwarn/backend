@@ -10,6 +10,12 @@ npm install
 npm run start:dev
 ```
 
+## Doc
+
+```
+http://localhost:3000/api
+```
+
 ## Test
 
 ```bash
