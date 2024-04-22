@@ -88,4 +88,13 @@ describe('AppController (e2e)', () => {
 
     expect(res.body).toMatchObject({ school: 1, user: 1 });
   });
+
+  it('/student/subscribe (GET)', async () => {
+    const res = await request(app.getHttpServer())
+      .get('/student/subscribe')
+      .set('Authorization', `Bearer ${userToken}`)
+      .expect(200);
+
+    expect(res.body).toMatchObject([{ school: 1, user: 1 }]);
+  });
 });

@@ -15,4 +15,9 @@ export class StudentController {
   async subscribe(@Req() req: Request, @Query('school') school: string) {
     return await this.studentService.subscribe(+school, req["user"].id);
   }
+
+  @Get('subscribe')
+  async findSubscribe(@Req() req: Request) {
+    return await this.studentService.findSubscribe(req["user"].id);
+  }
 }
