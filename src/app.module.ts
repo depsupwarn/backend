@@ -3,6 +3,8 @@ import { SchoolsModule } from './schools/schools.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
 import { NewsModule } from './news/news.module';
+import { SubscriptionsModule } from './subscriptions/subscriptions.module';
+import { StudentModule } from './student/student.module';
 
 @Module({
   imports: [
@@ -15,6 +17,8 @@ import { NewsModule } from './news/news.module';
     AuthModule,
     SchoolsModule,
     NewsModule,
+    SubscriptionsModule,
+    StudentModule,
   ],
   controllers: [],
   providers: [],
