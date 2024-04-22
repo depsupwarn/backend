@@ -97,4 +97,13 @@ describe('AppController (e2e)', () => {
 
     expect(res.body).toMatchObject([{ school: 1, user: 1 }]);
   });
+
+  it('/student/subscribe (DELETE)', async () => {
+    const res = await request(app.getHttpServer())
+      .delete('/student/subscribe?id=1')
+      .set('Authorization', `Bearer ${userToken}`)
+      .expect(200);
+
+    expect(res.body).toMatchObject({ deleted: true });
+  });
 });

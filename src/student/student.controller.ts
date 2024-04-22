@@ -20,4 +20,9 @@ export class StudentController {
   async findSubscribe(@Req() req: Request) {
     return await this.studentService.findSubscribe(req["user"].id);
   }
+
+  @Delete('subscribe')
+  async deleteSubscribe(@Req() req: Request, @Query('id') subscribe: string) {
+    return await this.studentService.deleteSubscribe(+subscribe, req["user"].id);
+  }
 }
