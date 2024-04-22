@@ -25,4 +25,9 @@ export class StudentController {
   async deleteSubscribe(@Req() req: Request, @Query('id') subscribe: string) {
     return await this.studentService.deleteSubscribe(+subscribe, req["user"].id);
   }
+
+  @Get('news')
+  async news(@Req() req: Request, @Query('school') school: string) {
+    return await this.studentService.news(+school, req["user"].id);
+  }
 }
